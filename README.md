@@ -10,3 +10,10 @@ Dependencies:
   - SSM Agent (See AWS docs)
 
 
+Functionality:
+
+  1. List historic AWS prices.
+  2. Launch custom AWS spot EC2 instance types and pass bash commands to process paired RNA fastq files.
+  3. Get status and attributes of commands invoked.
+  4. Get instance IDs of all active instances.
+  5. Deostray all terraform infastructure.
