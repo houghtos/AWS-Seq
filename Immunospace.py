@@ -142,7 +142,7 @@ if __name__ == "__main__":
 
 	elif args.options == 'start':
 
-		f = open(args.rna_AWS_file, 'r') #rna_AWS_Files.csv kept in same directory as python file.
+		f = open(args.rna_AWS_file, 'r') #rna_AWS_Files.csv example for input format.  
 		cvs_reader = csv.reader(f)
 		rna_list = []
 		for row in cvs_reader:
