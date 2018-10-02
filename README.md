@@ -56,12 +56,12 @@
       - Instance type (e.g. t3.2xlarge)
       - Months prior to today to query pricing
       
-    2. $ python Immunospace tf_pasers -n <number of instances> -t <instance type> -b <maximum spot bid> -s <number GiB for root storage> -f <S3 file list>
+    2. $ python Immunospace start -n <number of instances> -t <instance type> -b <maximum spot bid> -s <number GiB for root storage> -f <S3 file list>
       - Number of instance to launch (integer)
       - Instance type (e.g. t3.2xlarge)
       - Maximum spot bid in dollars (e.g. 0.25)
       - GiB assigned to root storage (integer).  Must account for size of all files or run will fail.
-      - S3 file list is a CSV of S3 file addresses.  Each column contains fastq pairs.  The first column contains pairs to be submitted to first EC2 instance.  The second column pairs for second EC2 instance. etc.  Ensure the number of columns and instances aligns to evenly spread processing.
+      - S3 file list is a CSV of S3 file addresses.  Each row contains fastq pairs.  The first row contains pairs to be submitted to first EC2 instance.  The row column pairs for second EC2 instance. etc. See next section for more information.
       
     3. $ python Immunospace command
       -No options.  Looks for all recent commands invoked.
@@ -71,4 +71,11 @@
     
     5. $ python Immunospace destroy
      - No options.  Destroys all Terraform infastructure that currently exists.
+     
+## csv input file:
+
+    See example in AWS-Seq repository: "rna_AWS_files.csv" 
     
+    Required input for python "Immunospace start ..."  CSV formatted file of S3 addresses for all fastq.gz pairs.  Each pair should be next to eachother in order (if possible).  The first row of pairs will be submitted to first EC2 instance.  The second row of pairs submitted to the second EC2 instance. etc.  Ensure the number of columns and instances aligns to evenly spread processing or your needs. 
+ 
+
