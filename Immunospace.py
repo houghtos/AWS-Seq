@@ -1,4 +1,4 @@
-# To output SSM commands to AWS S3, uncomment lines 96-98 and fill in your relevant information.
+# To output SSM commands to AWS S3, uncomment lines 89-91 and fill in your relevant information.
 
 #!/usr/bin/python
 from MainTFSource import mainGen
