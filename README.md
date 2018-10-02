@@ -17,3 +17,20 @@ Functionality:
   3. Get status and attributes of commands invoked.
   4. Get instance IDs of all active instances.
   5. Deostray all terraform infastructure.
+
+
+Seting up:
+
+  Not Required: 
+  1. SpotPriceModule.py: Filters for what EC2 pricing can be manually modified in line 33
+  2. Immunospace.py: Fill in lines 89-91 with AWS S3 information to output SSM job status (standard input/output)
+  
+  Required:
+  1.  MainTFSource.py: Set lines:
+                      - 25, 81 -- with security key (.pem) name and file address (see examples) 
+                      - 32     -- with AWS region
+                      - 63     -- with the name of your AWS security group (requires SSH inbound)
+  
+  2.  terraform.tvars: Set your AWS key/secret key
+  
+  3. 
