@@ -52,6 +52,8 @@
 
 ## Usage:
 
+All commands must be made from your terraform directory.
+
     1. $ python Immunospace price -t <instance type> -m <number months prior to query>
       - Instance type (e.g. t3.2xlarge)
       - Months prior to today to query pricing
