@@ -1,4 +1,4 @@
-#Set variables on lines 13, 14, 15, 16, 66
+#Set variables on lines 14, 14, 15, 16, 66
 #line 17 should include the hg19 reference files.
 
 
