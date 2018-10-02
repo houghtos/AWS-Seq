@@ -45,7 +45,7 @@ def mainGen(instanceNumbers, AMI_type, spot_bid, volume_size):
       values = ["hvm"]
     }
 
-    owners = ["137112412989"] # Canonical
+    owners = ["137112412989"] # Canonical # Amazon Linux 2 AMI (HVM), SSD Volume Type 
   }
 
   resource "aws_spot_instance_request" "spot_seq" {
@@ -60,7 +60,7 @@ def mainGen(instanceNumbers, AMI_type, spot_bid, volume_size):
     wait_for_fulfillment = true
     
     key_name = "MyEC2Key"
-    vpc_security_group_ids = ["sg-9a3c57d0"]  # Amazon Linux 2 AMI (HVM), SSD Volume Type 
+    vpc_security_group_ids = ["sg-1a2b3c4d"]  ###### <--- specify your security group.  Must allow SSH range.
 
 
     root_block_device {
