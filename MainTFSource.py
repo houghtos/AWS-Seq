@@ -29,7 +29,7 @@ def mainGen(instanceNumbers, AMI_type, spot_bid, volume_size):
     ## UNABLE TO ACCEPT KEYS WITH CHARACTERS LIKE '/+'  in most recent version.  Need fix.  Try config.
     access_key = "${var.access_key}"
     secret_key = "${var.secret_key}"
-    region = "us-wes-1"  ############ <-  Set region
+    region = "us-west-1"  ############ <-  Set region
   }
 
   data "aws_ami" "amazon_linux" {
