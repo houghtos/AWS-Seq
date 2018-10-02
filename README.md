@@ -34,9 +34,9 @@
   
   1.  **MainTFSource.py**: Set lines:
                       
-                      - 25, 81   -- with security key (.pem) name and file address (see examples) 
-                      - 32       -- with AWS region
-                      - 63       -- with the name of your AWS security group (requires SSH inbound)
+    - 25, 81   -- with security key (.pem) name and file address (see examples) 
+    - 32       -- with AWS region
+    - 63       -- with the name of your AWS security group (requires SSH inbound)
   
   2.  **terraform.tvars**: Set your AWS key/secret key
   
