@@ -49,3 +49,20 @@
                       - 16       -- with your S3 region
                       - 17       -- with your AWS S3 list of relevant hg19 reference files (written as "s3://YourBucket/hg19Refs/")
                       - 67       -- Output S3 for all files processed (written as "s3://yourbucket/yourprefix/")
+
+## Usage:
+
+    1. $ python Immunospace price -t <instance type> -m <number months prior to query>
+      - Instance type (e.g. t3.2xlarge)
+      - Months prior to today to query pricing
+    2. $ python Immunospace tf_pasers -n <number of instances> -t <instance type> -b <maximum spot bid> -s <number GiB for root storage> -f <S3 file list>
+      - Number of instance to launch (integer)
+      - Instance type (e.g. t3.2xlarge)
+      - Maximum spot bid in dollars (e.g. 0.25)
+      - GiB assigned to root storage (integer).  Must account for size of all files or run will fail.
+      - S3 file list is a CSV of S3 file addresses.  Each column contains fastq pairs.  The first column contains pairs to be submitted to first EC2 instance.  The second column pairs for second EC2 instance. etc.  Ensure the number of columns and instances aligns to evenly spread processing.
+      
+    3. $ python Immunospace 
+    4. $ python Immunospace 
+    5. $ python Immunospace 
+    6. $ python Immunospace 
