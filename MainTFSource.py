@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#Set lines 26, 33, 63, 80
+#Set lines 25, 32, 63, 81
 
 def mainGen(instanceNumbers, AMI_type, spot_bid, volume_size):
   main_string = """
@@ -22,7 +22,7 @@ def mainGen(instanceNumbers, AMI_type, spot_bid, volume_size):
   }
 
   variable "aws_keypair" {
-    default = "MyEC2Key"   ############## <- set the name of your key.  See line 80
+    default = "MyEC2Key"   ############## <- set the name of your key. 
   }
 
   provider "aws" {
