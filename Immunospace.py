@@ -104,19 +104,22 @@ def process_argument():
 	price_parser = subparsers.add_parser('price', help='historical spot pricing for instance')
 	price_parser.add_argument('-t', '--instance_type', help='EC2 instance type (e.g. t3.2xlarge)')
 	price_parser.add_argument('-m', '--months_delta', type=int, help='Number of months prior to examine EC2 spot costs for')
-
+	
+	#Launch EC2 spot instances and pass RNAseq paired aligning commands.
 	tf_pasers = subparsers.add_parser('start', help='Start terraform and pass commands to each instance ID')
 	tf_pasers.add_argument('-n', '--instance_numbers', type=int, help='Number of EC2 instances to spin up')
-	#tf_pasers.add_argument('-a', '--analysis_type', help='Analysis type to run... EG RNAseq paired end fastq')
 	tf_pasers.add_argument('-t', '--instance_type', help='EC2 instance type (e.g. t3.2xlarge) to spin up')
 	tf_pasers.add_argument('-b', '--bid', help='Maximum bid (e.g. 20 cents is 0.20) for spot instances')
 	tf_pasers.add_argument('-s', '--space', type=int, help='Amount of space (GiB) to allocate to each instance')
 	tf_pasers.add_argument('-f', '--rna_AWS_file', help='Path to the .csv containg the addresses of your RNA fastq.  Seee readme on github (houghtos) for more information')
 
+	#Shows all active commands created by terraform.
 	command_parser = subparsers.add_parser('command', help='Shows all commands invoked on all EC2 spot instances created by terraform')
 
+	#Display all active terraform instances.
 	instance_id_Parser = subparsers.add_parser('instances', help='Display list of all instance IDs for active instances')
-
+	
+	#Destroy all active terraform infastructure.
 	dest = subparsers.add_parser('destroy', help='Destroys all Terraform infastructure')
 
 	return (parser.parse_args())
