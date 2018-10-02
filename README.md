@@ -44,11 +44,11 @@
   
   4. **RNAseqSSM.py** Set lines:
                       
-                      - 14       -- with your AWS key
-                      - 15       -- with your secret access key
-                      - 16       -- with your S3 region
-                      - 17       -- with your AWS S3 list of relevant hg19 reference files (written as "s3://YourBucket/hg19Refs/")
-                      - 67       -- Output S3 for all files processed (written as "s3://yourbucket/yourprefix/")
+    - 14       -- with your AWS key
+    - 15       -- with your secret access key
+    - 16       -- with your S3 region
+    - 17       -- with your AWS S3 list of relevant hg19 reference files (written as "s3://YourBucket/hg19Refs/")
+    - 67       -- Output S3 for all files processed (written as "s3://yourbucket/yourprefix/")
 
 ## Usage:
 
