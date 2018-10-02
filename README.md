@@ -3,6 +3,8 @@
 
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 spot instance and S3 from the same region does not incur download charges.
 
+###### Credit David Redmond for helping with the RNAseq fastq paired pipeline 
+
 ## Dependencies:
 
   - Terraform
