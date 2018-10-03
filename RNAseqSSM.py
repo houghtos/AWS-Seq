@@ -82,7 +82,7 @@ def RNA_SSM(file_list):
 
 
 	else:
-		pass
+		print("There are an un-even number of fastq files in one of your job lists.  Only pairs of fastq files are accepted as inputs.")
 
 	
 	ssm_command_list.append("sudo shutdown -h now")
