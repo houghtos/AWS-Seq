@@ -7,11 +7,11 @@
 
 ## Dependencies:
 
-  - Terraform
-  - Python 3
-  - boto3 python library
-  - AWS CLI
-  - SSM Agent (See AWS docs)
+  - [Terraform](https://www.terraform.io/intro/getting-started/install.html)
+  - [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installing/)
+  - [boto3 python library](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#installation)
+  - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+  - [SSM Agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html)
 
 
 ## Functionality:
