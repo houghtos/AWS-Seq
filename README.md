@@ -74,7 +74,7 @@ All commands must be made from your terraform directory.
     5. $ python Immunospace destroy
      - No options.  Destroys all Terraform infastructure that currently exists.
      
-## csv input file:
+## csv file input:
 
     See example in AWS-Seq repository: "rna_AWS_files.csv" 
     
