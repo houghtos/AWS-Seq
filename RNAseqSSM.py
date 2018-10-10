@@ -6,21 +6,23 @@
 def RNA_SSM(file_list):
 	if (len(file_list) % 2) == 0: 
 		
+		#Initial commands only run once.
 		ssm_command_list = 	[
-							"sudo mkdir /home/ec2-user/refs/",
-							"sudo mkdir /home/ec2-user/fastq_RNA/",
-							"sudo chmod 777 /home/ec2-user/refs/",
-							"sudo chmod 777 /home/ec2-user/fastq_RNA/",
-							"aws configure set aws_access_key_id YourKeyHere",
-							"aws configure set aws_secret_access_key YourSecretKeyHere",
-							"aws configure set default.region us-west-1",
-							"aws s3 cp s3://YourBucket/hg19Refs/ /home/ec2-user/refs/ --recursive",
-							]
+					"sudo mkdir /home/ec2-user/refs/",
+					"sudo mkdir /home/ec2-user/fastq_RNA/",
+					"sudo chmod 777 /home/ec2-user/refs/",
+					"sudo chmod 777 /home/ec2-user/fastq_RNA/",
+					"aws configure set aws_access_key_id YourKeyHere",
+					"aws configure set aws_secret_access_key YourSecretKeyHere",
+					"aws configure set default.region us-west-1",
+					"aws s3 cp s3://YourBucket/hg19Refs/ /home/ec2-user/refs/ --recursive",
+					]
 
 		ssm_processing = str()
 		ssm_mid_commands = str()
 		iteration = 1
 		
+		#Generate commands to be run multiple times (E.g. process multiple samples, copy to S3, delete from local EC2 instance, run new samples).
 		for pair1 in range(0,len(file_list),2):
 			pair2 = pair1 + 1
 
@@ -56,7 +58,6 @@ def RNA_SSM(file_list):
 			copy = "aws s3 cp /home/ec2-user/fastq_RNA/ s3://yourbucket/yourprefix/{}/ --recursive".format(star_output_prefix[:-1]) ############## <-  Set your output S3 bucket and prefix here
 			remove_folder = "sudo rm -rf /home/ec2-user/fastq_RNA/"
 
-
 			ssm_command_list.append(fastq1_transfer)
 			ssm_command_list.append(fastq2_transfer)
 			ssm_command_list.append(trimmomatic)
@@ -68,12 +69,10 @@ def RNA_SSM(file_list):
 			ssm_command_list.append(remove_folder)
 			
 
-
-
 	else:
 		pass
 
-	
+	#Append shutdown as final command run by instance.
 	ssm_command_list.append("sudo shutdown -h now")
 
 	return(ssm_command_list)
