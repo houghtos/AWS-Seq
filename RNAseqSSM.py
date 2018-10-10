@@ -1,4 +1,4 @@
-#Set variables on lines 14, 15, 16, 17, 67
+#Set variables on lines 14, 15, 16, 17, 56
 #line 17 should include the hg19 reference files.
 
 
@@ -30,22 +30,11 @@ def RNA_SSM(file_list):
 			fastq1 = aws_fastq1.split('/')[-1]
 			fastq2 = aws_fastq2.split('/')[-1]
 
+			fastq1_trimmed = 'trimmed.' + fastq1  
+			fastq1_trimmed_unpaired = 'trimmed.unpaired.' + fastq1
 
-			fastq1_trimmed = fastq1.split('.')
-			fastq1_trimmed.insert(1,'trimmed')
-			fastq1_trimmed = ".".join(fastq1_trimmed)
-			
-			fastq1_trimmed_unpaired = fastq1_trimmed.split('.')
-			fastq1_trimmed_unpaired.insert(2,'unpaired')
-			fastq1_trimmed_unpaired = ".".join(fastq1_trimmed_unpaired)
-
-			fastq2_trimmed = fastq2.split('.')
-			fastq2_trimmed.insert(1,'trimmed')
-			fastq2_trimmed = ".".join(fastq2_trimmed)
-
-			fastq2_trimmed_unpaired = fastq2_trimmed.split('.')
-			fastq2_trimmed_unpaired.insert(2,'unpaired')
-			fastq2_trimmed_unpaired = ".".join(fastq2_trimmed_unpaired)
+			fastq2_trimmed = 'trimmed.' + fastq2  
+			fastq2_trimmed_unpaired = 'trimmed.unpaired.' + fastq2
 
 			star_output_prefix = fastq1.split('.')[0]
 			star_output_prefix = star_output_prefix + "_ITER_" + str(iteration) + "."
@@ -82,9 +71,10 @@ def RNA_SSM(file_list):
 
 
 	else:
-		print("There are an un-even number of fastq files in one of your job lists.  Only pairs of fastq files are accepted as inputs.")
+		pass
 
 	
 	ssm_command_list.append("sudo shutdown -h now")
 
 	return(ssm_command_list)
+
