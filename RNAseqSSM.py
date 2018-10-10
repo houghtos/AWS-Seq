@@ -1,7 +1,6 @@
 #Set variables on lines 14, 15, 16, 17, 56
 #line 17 should include the hg19 reference files.
 
-
 #Input a list of files.  Output a string of commands to be passed to instance ID. 
 def RNA_SSM(file_list):
 	if (len(file_list) % 2) == 0: 
@@ -29,15 +28,22 @@ def RNA_SSM(file_list):
 			aws_fastq1 = file_list[pair1]
 			aws_fastq2 = file_list[pair2]
 
+			#Original FASTQ file
 			fastq1 = aws_fastq1.split('/')[-1]
 			fastq2 = aws_fastq2.split('/')[-1]
 
+			#FASTQ 1 trimmed and trimmed.unpaired file names.
 			fastq1_trimmed = 'trimmed.' + fastq1  
 			fastq1_trimmed_unpaired = 'trimmed.unpaired.' + fastq1
 
+			#FASTQ 2 trimmed and trimmed.unpaired file names.
 			fastq2_trimmed = 'trimmed.' + fastq2  
 			fastq2_trimmed_unpaired = 'trimmed.unpaired.' + fastq2
 
+			#Generate output prefix for STAR aligning.
+			#Splits original FASTQ file name by periods ('.') and uses the first name (e.g. myfastq1.fastq.gz > myfastq1) 
+			#This prefix will be used to generate sam, bam, and gene counts file names.
+			# Note: The iteration number will also be appended to the name.
 			star_output_prefix = fastq1.split('.')[0]
 			star_output_prefix = star_output_prefix + "_ITER_" + str(iteration) + "."
 			
@@ -66,9 +72,7 @@ def RNA_SSM(file_list):
 			ssm_command_list.append(sam_view)
 			ssm_command_list.append(htseq)
 			ssm_command_list.append(copy)
-			ssm_command_list.append(remove_folder)
-			
-
+			ssm_command_list.append(remove_folder)		
 	else:
 		pass
 
