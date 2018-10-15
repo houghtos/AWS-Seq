@@ -36,7 +36,7 @@
                        
     - 23       -- with security key (.pem) name and file address (see examples).  This can be removed if you do not use security keys.  Strongly recommend a security group with all inbound/outbound access disabled if this is the case. 
     - 30       -- with AWS region
-    - 65       -- with the name of your AWS security group (requires SSH inbound)
+    - 65       -- with the name of your AWS security group (above for line 23 for restrictions)
   
   2.  **terraform.tvars**: Set your AWS key/secret key
   
