@@ -1,10 +1,8 @@
 #!/usr/bin/python
-
-#Set lines 25, 32, 63, 81
+#Set lines 23, 30, 65
 
 def mainGen(instanceNumbers, AMI_type, spot_bid, volume_size):
-  main_string = """
-
+  string_1 = """
   resource "aws_iam_role" "ec2_access" {
     name               = "ec2_spot"
     assume_role_policy = "${file("assume-role-policy.json")}"
@@ -45,58 +43,31 @@ def mainGen(instanceNumbers, AMI_type, spot_bid, volume_size):
       values = ["hvm"]
     }
 
-    owners = ["137112412989"] # Canonical # Amazon Linux 2 AMI (HVM), SSD Volume Type 
+    owners = ["137112412989"] # Canonical
   }
 
-  resource "aws_spot_instance_request" "spot_seq" {
-    count         =  %s
-    ami           = "${data.aws_ami.amazon_linux.id}"
-    spot_price    = %s 
-    key_name =    "${var.aws_keypair}"
-    instance_type = "%s"
-    spot_type     = "one-time"
-    iam_instance_profile   = "${aws_iam_instance_profile.SSM_Profile.name}"
-    associate_public_ip_address = true
-    wait_for_fulfillment = true
-    
-    key_name = "MyEC2Key"
-    vpc_security_group_ids = ["sg-1a2b3c4d"]  ###### <--- specify your security group.  Must allow SSH range.
+"""
 
+  string_2 =  ' resource "aws_spot_instance_request" "test_spot" {\n'
+  string_3 =  ' count         =  {}\n'.format(instanceNumbers)
+  string_4 =  ' ami           = "${data.aws_ami.amazon_linux.id}"\n'
+  string_5 =  ' spot_price    = {}\n'.format(spot_bid)
+  string_6 =  ' key_name =    "${var.aws_keypair}"\n'
+  string_7 =  ' instance_type = "{}"\n'.format(AMI_type)
+  string_8 =  ' spot_type     = "one-time"\n'
+  string_9 =  """  
 
-    root_block_device {
-      volume_size = "%s"
-      }
+  iam_instance_profile   = "${aws_iam_instance_profile.SSM_Profile.name}"\n
+  associate_public_ip_address = true
+  wait_for_fulfillment = true
+  
+  key_name = "ec2_test_group"
+  vpc_security_group_ids = ["sg-1a2b3c4d"]  ###### <--- specify your security group.  Does not require SSH.
+  user_data       = "${file("userdata.sh")}"
+    """
+  string_10  = 'root_block_device {volume_size = "%d"}' % (volume_size)
+  string_11  = 'tags {Name = "Immuno Spot"}}'
+      
 
-    tags {
-      Name = "Spot Seq"
-    }
-  }
+  return(string_1 + string_2 + string_3 + string_4 + string_5 + string_6 + string_7 + string_8 + string_9 + string_10 + string_11)
 
-  resource "null_resource" "configure-aws-instances" {
-    count =  %s
-
-    connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      private_key = "${file("/home/users/Sean/AWS/EC2_Private_Keys/MyEC2Key.pem")}" ############ <-- Specify private key local path
-      host  = "${element(aws_spot_instance_request.spot_seq.*.public_ip, count.index)}"
-    }
-
-    provisioner "remote-exec"{
-      inline = [
-        "sudo yum update -y",
-        "sudo yum install -y python-pip",        
-        "sudo yum install java-1.8.0-openjdk-devel -y",
-        "sudo yum install docker -y",
-        "sudo sudo service docker start",
-        "sudo docker pull houghtos/immunotools:version2",
-        "sudo docker run houghtos/immunotools:version2",
-        "sudo systemctl enable amazon-ssm-agent",
-        "sudo systemctl start amazon-ssm-agent"
-      ]
-    }
-  }
-
-  """ %  (instanceNumbers, spot_bid, AMI_type, volume_size, instanceNumbers)
-
-  return(main_string)
