@@ -1,5 +1,5 @@
 # AWS-Seq
-###### Using Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation and task managing.
+###### Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation and task managing.
 
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 spot instance and S3 from the same region does not incur download charges.
 
