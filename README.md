@@ -16,9 +16,9 @@
 
 ## Functionality:
 
-  1. List historic AWS prices.
-  2. Launch custom AWS spot EC2 instance types and pass bash commands to process paired RNA fastq files.
-  3. Get status and attributes of commands invoked.
+  1. List historic and current AWS spot pricing.  
+  2. Launch custom AWS spot EC2 instance types and pass bash commands to spot EC2 instance(s) to process paired RNA fastq files.
+  3. Get status and attributes of commands being invoked.
   4. Get instance IDs of all active instances.
   5. Destroy all terraform infastructure.
 
