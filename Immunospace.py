@@ -1,6 +1,5 @@
-# To output SSM commands to AWS S3, uncomment lines 89-91 and fill in your relevant information.
+# To output SSM commands to AWS S3, uncomment lines 98-100 and fill in your relevant information.
 
-#!/usr/bin/python
 from MainTFSource import mainGen
 from RNAseqSSM import RNA_SSM
 from spotPriceModule import comparePrice 
