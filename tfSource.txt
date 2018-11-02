@@ -1,0 +1,59 @@
+#Set lines 16, 22, 49, 
+
+resource "aws_iam_role" "ec2_access" {
+    name               = "ec2_spot"
+    assume_role_policy = "${file("assume-role-policy.json")}"
+  }
+  resource "aws_iam_role_policy_attachment" "SSM_Profile" {
+    role = "${aws_iam_role.ec2_access.name}"
+    policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
+  }
+  resource "aws_iam_instance_profile" "SSM_Profile" {
+    name  = "SSM_Profile"
+    role = "${aws_iam_role.ec2_access.name}"
+  }
+  variable "aws_keypair" {
+    default = "MyEC2Key"   ############## <- set the name of your key. 
+  }
+  provider "aws" {
+    ## UNABLE TO ACCEPT KEYS WITH CHARACTERS LIKE '/+'  in most recent version.  Need fix.  Try config.
+    access_key = "${var.access_key}"
+    secret_key = "${var.secret_key}"
+    region = "us-west-1"  ############ <-  Set region
+  }
+  data "aws_ami" "amazon_linux" {
+    most_recent = true
+    filter {
+      name   = "name"
+      values = ["amzn2-ami-hvm-*"]
+    }
+    filter {
+      name   = "virtualization-type"
+      values = ["hvm"]
+    }
+    owners = ["137112412989"] # Canonical
+  }
+
+  resource "aws_spot_instance_request" "test_spot" {
+    count         = COUNT
+    ami           = "${data.aws_ami.amazon_linux.id}"
+    spot_price    = BID/// 
+    key_name =    "${var.aws_keypair}"
+    instance_type = "TYPE///"
+    spot_type     = "one-time"
+    iam_instance_profile   = "${aws_iam_instance_profile.SSM_Profile.name}"
+    associate_public_ip_address = true
+    wait_for_fulfillment = true
+    
+    key_name = "MyEC2Key"
+    vpc_security_group_ids = ["sg-1a2b3c4d"] ###### <--- specify your security.  Does not require SSH.
+    user_data       = "${file("userdata.sh")}"
+
+    root_block_device {
+      volume_size = SIZE///
+      }
+
+    tags {
+      Name = "Immuno-Test"
+    }
+  }
