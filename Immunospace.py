@@ -12,9 +12,19 @@ import csv
 
 #Function to write the new Main.tf file in your terraform directory.
 def writeTFmain(main):
-	f= open("Main.tf","w+")
-	f.write(main)
-	f.close()
+	f=open("tfSource.txt", "r")
+	if f.mode == 'r':
+		contents =f.read()
+		contents = re.sub('COUNT', str(instanceNumbers), contents)
+		contents = re.sub('BID///', str(spot_bid), contents)
+		contents = re.sub('TYPE///', str(AMI_type), contents)
+		contents = re.sub('SIZE///', str(volume_size), contents)
+		#print(contents)
+		f.close()
+
+	w= open("Main.tf","w+")
+	w.write(contents)
+	w.close()
 	return("**** Main TF file written *****")
 
 #Regex method to obtain instance IDs.  Used to be compatible accross multiple OS systems.
