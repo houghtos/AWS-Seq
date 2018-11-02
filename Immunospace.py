@@ -156,9 +156,9 @@ if __name__ == "__main__":
 		tfSTart()
 		listReturn = getInstanceIDs()
 
-		for instnace_ID in len(listReturn):
-			RNA_Commands = RNA_SSM(rna_list[instnace_ID])
-			sendSSMCommand(listReturn[instnace_ID],RNA_Commands) 
+		for instance_ID in range(len(listReturn)):
+			RNA_Commands = RNA_SSM(rna_list[instance_ID])
+			sendSSMCommand(listReturn[instance_ID],RNA_Commands) 
 
 	elif args.options == 'destroy':
 		destroy()
