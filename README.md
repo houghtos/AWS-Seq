@@ -1,5 +1,5 @@
 # AWS-Seq
-###### Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation and task managing.  Current setup is for processing paired fastq RNAseq files for gene counts.
+###### Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation and task managing.  Current setup is for processing paired fastq RNAseq files for gene counts.  This version uses the windows Terraform shell commands (e.g. Terraform apply.)  To change to linux or mac, change all os.system() commands to "./terraform" in the Immunospace.py file. 
 
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 spot instance and S3 from the same region does not incur download charges.
 
