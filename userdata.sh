@@ -1,4 +1,5 @@
 #!/bin/bash -v
+sudo sleep 15
 sudo yum update -y
 sudo yum install -y python-pip        
 sudo yum install java-1.8.0-openjdk-devel -y
