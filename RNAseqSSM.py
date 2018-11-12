@@ -23,7 +23,7 @@ def RNA_SSM(file_list):
 		ssm_mid_commands = str()
 		iteration = 1
 		
-		#Generate commands to be run multiple times (E.g. process multiple samples, copy to S3, delete from local EC2 instance, run new samples).
+		#Generate commands to be run multiple times (E.g. pipeline generates reads from RNAseq paired alignment, copy output to S3, delete local files from EC2 instance, run same pipeline on next RNAseq fastq pair from list...).
 		for pair1 in range(0,len(file_list),2):
 			pair2 = pair1 + 1
 
