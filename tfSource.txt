@@ -1,36 +1,43 @@
-#Set lines 16, 22, 49, 
-
 resource "aws_iam_role" "ec2_access" {
-    name               = "ec2_spot"
+    name               = "ec2_policy_access"
     assume_role_policy = "${file("assume-role-policy.json")}"
   }
+
+
   resource "aws_iam_role_policy_attachment" "SSM_Profile" {
     role = "${aws_iam_role.ec2_access.name}"
     policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
   }
+
   resource "aws_iam_instance_profile" "SSM_Profile" {
     name  = "SSM_Profile"
     role = "${aws_iam_role.ec2_access.name}"
   }
+
   variable "aws_keypair" {
-    default = "MyEC2Key"   ############## <- set the name of your key. 
+    default = "PEM_NAME///"
   }
+
   provider "aws" {
-    ## UNABLE TO ACCEPT KEYS WITH CHARACTERS LIKE '/+'  in most recent version.  Need fix.  Try config.
+    ## UNABLE TO ACCEPT KEYS WITH CHARACTERS LIKE '/+'  in most recent Terraform version.
     access_key = "${var.access_key}"
     secret_key = "${var.secret_key}"
-    region = "us-west-1"  ############ <-  Set region
+    region = "REGION///"
   }
+
   data "aws_ami" "amazon_linux" {
     most_recent = true
+
     filter {
       name   = "name"
       values = ["amzn2-ami-hvm-*"]
     }
+
     filter {
       name   = "virtualization-type"
       values = ["hvm"]
     }
+
     owners = ["137112412989"] # Canonical
   }
 
@@ -45,15 +52,44 @@ resource "aws_iam_role" "ec2_access" {
     associate_public_ip_address = true
     wait_for_fulfillment = true
     
-    key_name = "MyEC2Key"
-    vpc_security_group_ids = ["sg-1a2b3c4d"] ###### <--- specify your security.  Does not require SSH.
-    user_data       = "${file("userdata.sh")}"
+    key_name = "KEYNAME///"
+    vpc_security_group_ids = ["VPC///"]
+
 
     root_block_device {
       volume_size = SIZE///
       }
 
     tags {
-      Name = "Immuno-Test"
+      Name = "Immuno Spot"
+    }
+  }
+
+  resource "null_resource" "configure-aws-instances" {
+    count =  COUNT
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = "${file("PEM_ADDRESS///")}"
+      host  = "${element(aws_spot_instance_request.test_spot.*.public_ip, count.index)}"
+    }
+
+    provisioner "remote-exec"{
+      inline = [
+        "sleep 15",
+        "sudo yum update -y",
+        "sudo yum install -y python-pip",
+        "sudo yum update -y",        
+        "sudo yum install java-1.8.0-openjdk-devel -y",
+        "sudo yum update -y",
+        "sudo amazon-linux-extras install docker -y",
+        "sudo service docker start",
+        "sudo usermod -a -G docker ec2-user",  #Add the user to docker group so you can execute Docker commands without using sudo.
+        "sudo docker pull houghtos/immunotools:version2",
+        "sudo docker run houghtos/immunotools:version2",
+        "sudo systemctl enable amazon-ssm-agent",
+        "sudo systemctl start amazon-ssm-agent"
+      ]
     }
   }
