@@ -1,12 +1,15 @@
 # Immunospace 1.1
 ###### Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation, provisioning, and pipeline running to save costs on processing NGS data.  Current setup is for processing paired fastq RNAseq files. 
 
-###### 1.1 Update Notes:
-  - Added configure function so user can set sensative variables (e.g. AWS key, S3 bucket name)
-
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 spot instance and S3 from the same region does not incur download charges.
 
 ###### Credit: David Redmond helping develop RNAseq fastq paired pipeline. 
+
+## 1.1 Update Notes:
+  - Added configure functionality so user has to make far fewer modifications to code.
+  - Set SSM timeout to 10 hours per instance (rather than 1 hour default).  This can be adjusted in the immunospace.py file under the boto3 SSM function.
+  - Minor changes to RNAseq pipeline to run smoother.
+  - Added option '-c' to "$ python immunospace.py start ..." for cloud prefix output of files and SSM run logs.
 
 ## Dependencies:
 
