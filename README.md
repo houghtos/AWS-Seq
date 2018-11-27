@@ -1,5 +1,5 @@
 # AWS-Seq
-###### Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation and task managing.  Current setup is for processing paired fastq RNAseq files for gene counts.  This version uses the windows Terraform shell commands (e.g. Terraform apply.)  To change to linux or mac, change all os.system() commands to "./terraform" in the Immunospace.py file. 
+###### Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation and task managing.  Current setup is for processing paired fastq RNAseq files for gene counts. 
 
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 spot instance and S3 from the same region does not incur download charges.
 
@@ -17,10 +17,11 @@
 ## Functionality:
 
   1. List historic and current AWS spot pricing.  
-  2. Launch custom AWS spot EC2 instance types and pass bash commands to spot EC2 instance(s) to process paired RNA fastq files.
-  3. Get status and attributes of commands being invoked.
-  4. Get instance IDs of all active instances.
-  5. Destroy all terraform infastructure.
+  2. Configure credentials for use in provisioning instance(s), sending SSM commands, etc.
+  3. Launch custom AWS spot EC2 instance types and pass bash commands to spot EC2 instance(s) to process paired RNA fastq files.
+  4. Get status and attributes of commands being invoked.
+  5. Get instance IDs of all active instances.
+  6. Destroy all terraform infastructure.
 
 ## Setting up:
 
@@ -28,21 +29,7 @@
   
   1. **SpotPriceModule.py**: Filters for what EC2 pricing can be manually modified in line 33
   
-  2. **Immunospace.py**: Fill in lines 89-91 with AWS S3 information to output SSM job status (standard input/output)
-  
-  ###### Required:
-  
-  1.  **MainTFSource.py**: Set lines:
-                       
-    - 23       -- with security key (.pem) name and file address (see examples).  This can be removed if you do not use security keys.  Strongly recommend a security group with all inbound/outbound access disabled if this is the case. 
-    - 30       -- with AWS region
-    - 65       -- with the name of your AWS security group (above for line 23 for restrictions)
-  
-  2.  **terraform.tvars**: Set your AWS key/secret key
-  
-  3.  **variables.tf**: Set your AWS region
-  
-  4. **RNAseqSSM.py** Set lines:
+  2. **RNAseqSSM.py** Set lines:
                   
     - 16       -- with your AWS key
     - 17       -- with your secret access key
@@ -54,24 +41,27 @@
 
 All commands must be made from your terraform directory.
 
-    1. $ python Immunospace price -t <instance type> -m <number months prior to query>
+    1. $ python Immunospace.py price -t <instance type> -m <number months prior to query>
       - Instance type (e.g. t3.2xlarge)
       - Months prior to today to query pricing
-      
-    2. $ python Immunospace start -n <number of instances> -t <instance type> -b <maximum spot bid> -s <number GiB for root storage> -f <S3 file list>
+     
+    2. $ python Immunospace.py 
+    
+    3. $ python Immunospace.py start -n <number of instances> -t <instance type> -b <maximum spot bid> -s <number GiB for root storage> -f <S3 file list> -c <S3 cloud prefix>
       - Number of instance to launch (integer)
       - Instance type (e.g. t3.2xlarge)
       - Maximum spot bid in dollars (e.g. 0.25)
       - GiB assigned to root storage (integer).  Must account for size of all files or run will fail.
       - S3 file list is a CSV of S3 file addresses.  Each row contains fastq pairs.  The first row contains pairs to be submitted to first EC2 instance.  The row column pairs for second EC2 instance. etc. See next section for more information.
+      -  S3 prefix (assuming bucket is already configured) to write files and SSM logs to.
       
-    3. $ python Immunospace command
+    4. $ python Immunospace command
       -No options.  Looks for all recent commands invoked.
     
-    4. $ python Immunospace instances 
+    5. $ python Immunospace instances 
       - No options.  Displays all active instances launched by terraform as list.
     
-    5. $ python Immunospace destroy
+    6. $ python Immunospace destroy
      - No options.  Destroys all Terraform infastructure that currently exists.
      
 ## csv file input:
