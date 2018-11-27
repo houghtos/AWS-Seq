@@ -37,11 +37,11 @@
   
   2. **RNAseqSSM.py** Set lines:
                   
-    - 16       -- with your AWS key
-    - 17       -- with your secret access key
-    - 18       -- with your S3 region
-    - 19       -- with your AWS S3 list of relevant hg19 reference files (written as "s3://YourBucket/hg19Refs/")
-    - 66       -- Output S3 for all files processed (written as "s3://yourbucket/yourprefix/")
+    - 25       -- With your S3 address for reference genome files.  In the RNAseqSSM.py example, we use mm10.
+    - 72       -- Set the .gtf reference file used in htseq analysis.  In the RNAseqSSM.py example, we use Mus_musculus.GRCm38.75.gtf.  This would be one of the files copied from your reference genome files.
+    - 73       -- Set the bucket you wish to output files to.  Will patch this shortly to include the bucket from configure file. 
+  
+  3. **terraform.tvars** set you AWS key / secret key (will patch this to utilize the configure functionality shortly)
 
 ## Usage:
 
