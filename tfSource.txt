@@ -52,7 +52,7 @@ resource "aws_iam_role" "ec2_access" {
     associate_public_ip_address = true
     wait_for_fulfillment = true
     
-    key_name = "KEYNAME///"
+    key_name = "PEM_NAME///"
     vpc_security_group_ids = ["VPC///"]
 
 
