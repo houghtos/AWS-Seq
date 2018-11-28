@@ -1,5 +1,5 @@
 # Immunospace 1.1
-###### Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation, provisioning, and pipeline running to save costs on processing NGS data.  Current setup is for processing paired fastq RNAseq files. 
+###### 80% cost reduction in processing bulk NGS data through the cloud (AWS).  Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation, provisioning, and job submission.  Current setup is for processing paired fastq RNAseq files. 
 
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 spot instance and S3 from the same region does not incur download charges.
 
