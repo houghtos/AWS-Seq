@@ -7,31 +7,39 @@ def runConfig():
 	import json
 	import io
 
-	with open('config.json') as f:
+		with open('config.json') as f:
 		priorConfig = json.load(f)
 		tempDat = priorConfig['awsCreds']['access_key'] 
 		if tempDat == '':
 			aws_key = input('AWS Access Key: ')
 		else:
 			tempDat = tempDat[-4:]
-			aws_key = input('AWS Access Key: '+ '\n' + '[*****************' + tempDat + ']' +  '\n')
+			aws_key = input('AWS Access Key: '+ '[****************' + tempDat + ']: ')
 
 		tempDat = priorConfig['awsCreds']['aws_secret_key'] 
 		if tempDat == '':
-			aws_secret_key = input('AWS Secret Key: ')
+			aws_secret_key = input('AWS Secret Access Key: ')
 		else:
 			tempDat = tempDat[-4:]
-			aws_secret_key = input('AWS Secret Key: ' + '\n' + '[*****************' + tempDat + ']' + '\n')
+			aws_secret_key = input('AWS Secret Access Key: ' + '[****************' + tempDat + ']: ')
 		
 		tempDat = priorConfig['awsCreds']['region'] 
-		region = input('AWS region [' + tempDat + ']' + '\n')
+		if tempDat == '':
+			region = input('AWS region: ')
+		else:
+			region = input('AWS region [' + tempDat + ']: ')
+
+
 		tempDat = priorConfig['S3bucket']
 		S3bucket = input('AWS S3 Bucket Output: ')
-		secGroup = input('Input security group: ')
-		pemAddress = input('Input Private Security Key (.pem) address: ')
+
+
+		secGroup = input('Input AWS security group: ')
+
+		pemAddress = input('Input Private Security Key (.pem) directory address: ')
+
 		osInput = input('Linux, Mac or Windows Operating System (accpetable answers are "linux", "mac", "unix", or "windows"): ' )
-		
-    if osInput.lower() in ('linux','mac', 'unix'):
+		if osInput.lower() in ('linux','mac', 'unix'):
 			osType = './terraform'
 		else:
 			osType = 'Terraform'
