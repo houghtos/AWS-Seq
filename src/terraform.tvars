@@ -1,0 +1,4 @@
+#Note: Terraform's most recent version cannot take keys that contain characters such as frontslashes or commands: "/ , %"
+#It's reccommded for now (10/1/2018) by HashiCorp to re-generate keys until both only have integer and character values.
+access_key = "YOURaccessKEY" 
+secret_key = "YOURsecretKEY"
