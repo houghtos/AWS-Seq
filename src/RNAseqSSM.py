@@ -1,5 +1,6 @@
-#Set variables on lines 25, 73, 74
-#This example uses mm10 (mouse) reference sequence.
+#Set variables on lines 25, 73 for desired reference files. 
+#These files will be copied from an S3 directory.
+#This example shows mm10 (mouse) reference sequence.
 
 import json
 def RNA_SSM(file_list, s3_output):
@@ -8,6 +9,7 @@ def RNA_SSM(file_list, s3_output):
 		keyVar = configVals['awsCreds']['access_key']
 		secretKeyVar = configVals['awsCreds']['aws_secret_key']
 		regionVar = configVals['awsCreds']['region']
+		bucket = configVals['S3bucket']
 
 	if (len(file_list) % 2) == 0: 
 		
@@ -70,7 +72,7 @@ def RNA_SSM(file_list, s3_output):
 			sam_sort = "sudo docker run -v /home/ec2-user/:/data houghtos/immunotools:version3 /usr/local/bin/bin/samtools sort -n -@ 6 -m 4G /data/output/{} -o /data/output/{}".format(out_sam,aligned_out_bam)
 			sam_view = "sudo docker run -v /home/ec2-user/:/data houghtos/immunotools:version3 /usr/local/bin/bin/samtools view /data/output/{} -o /data/output/{}".format(aligned_out_bam,aligned_out_sam)
 			htseq = "sudo docker run -v /home/ec2-user/:/data houghtos/immunotools:version3 /usr/local/bin/htseq-count --stranded=no --order=name --idattr=gene_name --mode=intersection-nonempty /data/output/{} /data/refs/Mus_musculus.GRCm38.75.gtf > /home/ec2-user/output/{}".format(aligned_out_sam,gene_counts) #<<<<< The .GTF file here is set from the reference files (mm10 example here)
-			copy = "aws s3 cp /home/ec2-user/output/ s3://yourbucket/{}/{}/ --recursive".format(s3_output,star_output_prefix[:-1]) #<<<<< Set your bucket name output here
+			copy = "aws s3 cp /home/ec2-user/output/ " + "s3://" + bucket + "/{}/{}/ --recursive".format(s3_output,star_output_prefix[:-1])
 			removeFastqFolder = "sudo rm -rf /home/ec2-user/fastq_RNA/"
 			removeOutputFolder = "sudo rm -rf /home/ec2-user/output/"
 
