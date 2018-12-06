@@ -1,0 +1,13 @@
+{
+    "OS": "",
+    "S3bucket": "",
+    "awsCreds": {
+        "access_key": "",
+        "aws_secret_key": "",
+        "region": ""
+    },
+    "awsEC2": {
+        "pemAddress": "",
+        "secGroup": ""
+    }
+}
