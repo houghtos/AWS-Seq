@@ -31,6 +31,11 @@
 
 ## Setting up:
 
+  1. Install [Terraform](https://www.terraform.io/intro/getting-started/install.html), [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installing/), , and [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html).  
+  2. Configure your AWS CLI with access key, secret key, and region.
+  3. Download all source files to your terraform directory (or the directory you set terraform to run in).
+  4. Run the Immunospace configure (see usage below).  Strongly suggest setting EC2 region to same as S3 to avoid egress costs.
+
   ###### Not Required: 
   
   1. **SpotPriceModule.py**: Filters for what EC2 pricing can be manually modified in line 33
