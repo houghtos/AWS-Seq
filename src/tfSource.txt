@@ -91,8 +91,8 @@ resource "aws_iam_role" "ec2_access" {
         "sudo amazon-linux-extras install docker -y",
         "sudo service docker start",
         "sudo usermod -a -G docker ec2-user", 
-        "sudo docker pull houghtos/immunotools:version2",
-        "sudo docker run houghtos/immunotools:version2",
+        "sudo docker pull houghtos/immunotools:version3",
+        "sudo docker run houghtos/immunotools:version3",
         "sudo systemctl enable amazon-ssm-agent",
         "sudo systemctl start amazon-ssm-agent"
       ]
