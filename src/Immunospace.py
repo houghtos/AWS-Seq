@@ -51,8 +51,10 @@ def writeTFmain(instanceNumbers, AMI_type, spotBid, volumeSize):
 	varsTF.close()
 
 	TFvars= open("terraform.tfvars","w+")
-	TFvars.write(r'access_key = ' + '"{}"'.format(aws_key) + '\n')
-	TFvars.write(r'secret_key = ' + '"{}"'.format(secret_key) + '\n')
+	temp_str = 'access_key = ' + '"{}"'.format(aws_key)
+	TFvars.write(temp_str + '\n')
+	temp_str = 'secret_key = ' + '"{}"'.format(aws_secret_key)
+	TFvars.write(temp_str + '\n')
 	TFvars.close()
 
 	return("**** Main TF file written *****")
