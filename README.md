@@ -1,15 +1,10 @@
-# Immunospace 1.1
-###### 80% cost reduction in processing bulk NGS data through the cloud (AWS).  Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation, provisioning, and job submission.  Current setup is for processing paired fastq RNAseq files. 
+# Immunospace 1.2
+###### Command line interface tool for cost effective NGS data processing with the AWS cloud.  Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation, provisioning, and job submission.  Monitor cloud price trends to optimize processing time saving computing costs.  Current public pipelins process paired fastq RNAseq files. 
 
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 spot instance and S3 from the same region does not incur download charges.
 
-###### Credit: David Redmond helping develop RNAseq fastq paired pipeline. 
+###### Credit: David Redmond helping develop RNAseq & mixcr fastq paired pipelines. 
 
-## 1.1 Update Notes:
-  - Added configure functionality so user has to make far fewer modifications to code.
-  - Set SSM timeout to 10 hours per instance (rather than 1 hour default).  This can be adjusted in the immunospace.py file under the boto3 SSM function.
-  - Minor changes to RNAseq pipeline to run smoother.
-  - Added option '-c' to "$ python immunospace.py start ..." for cloud prefix output of files and SSM run logs.
 
 ## Dependencies:
 
@@ -38,16 +33,15 @@
 
   ###### Not Required: 
   
-  1. **SpotPriceModule.py**: Filters for what EC2 pricing can be manually modified in line 33
+  - **SpotPriceModule.py**: Filters for what EC2 pricing can be manually modified in line 33
   
-  2. **RNAseqSSM.py** Set lines:
+  ###### Required: 
+  - **RNAseqSSM.py** Set lines:
                   
     - 25       -- With your S3 address for reference genome files.  In the RNAseqSSM.py example, we use mm10.
-    - 72       -- Set the .gtf reference file used in htseq analysis.  In the RNAseqSSM.py example, we use Mus_musculus.GRCm38.75.gtf.  This would be one of the files copied from your reference genome files.
-    - 73       -- Set the bucket you wish to output files to.  Will patch this shortly to include the bucket from configure file. 
+    - 73       -- Set the .gtf reference file used in htseq analysis.  In the RNAseqSSM.py example, we use Mus_musculus.GRCm38.75.gtf.  This would be one of the files copied from your reference genome files.
+     
   
-  3. **terraform.tvars** set you AWS key / secret key (will patch this to utilize the configure functionality shortly)
-
 ## Usage:
 
 All commands must be made from your terraform directory.
@@ -79,6 +73,17 @@ All commands must be made from your terraform directory.
 
     See example in AWS-Seq repository: "rna_AWS_files.csv" 
     
-    Required input for python "Immunospace start ..."  CSV formatted file of S3 addresses for all fastq.gz pairs.  Each pair should be next to eachother in order (if possible).  The first row of pairs will be submitted to first EC2 instance.  The second row of pairs submitted to the second EC2 instance. etc.  Ensure the number of columns and instances aligns to evenly spread processing or your needs. 
- 
-
+    The number of rows in the CSV should be the same as number of instances you are starting.  Each row of paired fastq files will be processed by one instance via sending SSM command.
+    
+## 1.2 Update Notes:
+  - Patched Immunospace.py write main terraform function to include writing terraform.tfvars file based on config.json setup. 
+  - Updated SSM pipelines to auto-copy to bucket designated in config.json
+  - Now using Docker container Immunotools to version3 which takes up ~270MB of more space (~750MB total).   
+    - Immunotoools version3 docker container now contains [MiXCR](https://mixcr.readthedocs.io/en/master/)  
+  - Added MiXCR pipeline that is swappable with the RNAseq default.  Same inputs as RNAseq pipeline. 
+  
+## 1.1 Update Notes:
+  - Added configure functionality so user has to make far fewer modifications to code.
+  - Set SSM timeout to 10 hours per instance (rather than 1 hour default).  This can be adjusted in the immunospace.py file under the boto3 SSM function.
+  - Minor changes to RNAseq pipeline to run smoother.
+  - Added option '-c' to "$ python immunospace.py start ..." for cloud prefix output of files and SSM run logs.
