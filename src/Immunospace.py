@@ -17,6 +17,8 @@ def writeTFmain(instanceNumbers, AMI_type, spotBid, volumeSize):
 		configVals = json.load(g)
 		regionConfig = configVals['awsCreds']['region']
 		vpcConfig = configVals['awsEC2']['secGroup']
+		aws_key = configVals['awsCreds']['access_key']
+		aws_secret_key = configVals['awsCreds']['aws_secret_key']
 		
 		pemConfig = configVals['awsEC2']['pemAddress']
 		pemNameConfig = pemConfig.split('/')
@@ -42,10 +44,15 @@ def writeTFmain(instanceNumbers, AMI_type, spotBid, volumeSize):
 	w.write(contents)
 	w.close()
 
-	TFvars= open("variables.tf","w+")
-	TFvars.write(r'variable "access_key" {}' +'\n')
-	TFvars.write(r'variable "secret_key" {}' +'\n')
-	TFvars.write('variable "region" {default = "%s"}'% regionConfig)
+	varsTF= open("variables.tf","w+")
+	varsTF.write(r'variable "access_key" {}' +'\n')
+	varsTF.write(r'variable "secret_key" {}' +'\n')
+	varsTF.write('variable "region" {default = "%s"}'% regionConfig)
+	varsTF.close()
+
+	TFvars= open("terraform.tfvars","w+")
+	TFvars.write(r'access_key = ' + '"{}"'.format(aws_key) + '\n')
+	TFvars.write(r'secret_key = ' + '"{}"'.format(secret_key) + '\n')
 	TFvars.close()
 
 	return("**** Main TF file written *****")
