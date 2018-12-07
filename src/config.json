@@ -1,6 +1,7 @@
 {
     "OS": "",
     "S3bucket": "",
+    "User": "",
     "awsCreds": {
         "access_key": "",
         "aws_secret_key": "",
