@@ -1,13 +1,18 @@
 #!/usr/bin/python
+
+
 #Command line prompt (similar to AWS/Google CLI) for writing and storing AWS credentials in config.json
+#Opens and writes credentials to config.json. 
+#Command line questions (similar to AWS/Google CLI) for configuring variables.
 #coding utf-8
-#Open and write to config.json. 
 
 def runConfig():
+
 	import json
 	import io
 
-		with open('config.json') as f:
+
+	with open('config.json') as f:
 		priorConfig = json.load(f)
 		tempDat = priorConfig['awsCreds']['access_key'] 
 		if tempDat == '':
@@ -15,6 +20,10 @@ def runConfig():
 		else:
 			tempDat = tempDat[-4:]
 			aws_key = input('AWS Access Key: '+ '[****************' + tempDat + ']: ')
+			if aws_key == '':
+				aws_key = priorConfig['awsCreds']['access_key']
+			else:
+				pass
 
 		tempDat = priorConfig['awsCreds']['aws_secret_key'] 
 		if tempDat == '':
@@ -22,21 +31,29 @@ def runConfig():
 		else:
 			tempDat = tempDat[-4:]
 			aws_secret_key = input('AWS Secret Access Key: ' + '[****************' + tempDat + ']: ')
+			if aws_secret_key == '':
+				aws_secret_key = priorConfig['awsCreds']['aws_secret_key']
+			else:
+				pass
 		
 		tempDat = priorConfig['awsCreds']['region'] 
 		if tempDat == '':
 			region = input('AWS region: ')
 		else:
 			region = input('AWS region [' + tempDat + ']: ')
+			if region == '':
+				region = priorConfig['awsCreds']['region'] 
+			else:
+				pass
 
 
 		tempDat = priorConfig['S3bucket']
 		S3bucket = input('AWS S3 Bucket Output: ')
 
 
-		secGroup = input('Input AWS security group: ')
+		secGroup = input('Input security group: ')
 
-		pemAddress = input('Input Private Security Key (.pem) directory address: ')
+		pemAddress = input('Input Private Security Key (.pem) address: ')
 
 		osInput = input('Linux, Mac or Windows Operating System (accpetable answers are "linux", "mac", "unix", or "windows"): ' )
 		if osInput.lower() in ('linux','mac', 'unix'):
@@ -44,10 +61,11 @@ def runConfig():
 		else:
 			osType = 'Terraform'
 
+		userInput = input('Input username to associate with your Immunospace activity: ' )
+
 	#Empty data structure for credentials.  
 	#jsonInput variables will be used for writing to the config.json file.
-	
-  jsonInput = {
+	jsonInput = {
 			'awsCreds': {
 						'access_key': '',
 						'aws_secret_key': '',
@@ -58,7 +76,8 @@ def runConfig():
 				'secGroup':'',
 				'pemAddress' : ''
 				},
-			'OS':''
+			'OS':'',
+			"User": ''
 			}
 
 	#Embedding command line input credentials with jsonInput data structure.
@@ -69,6 +88,7 @@ def runConfig():
 	jsonInput['awsEC2']['secGroup'] = secGroup
 	jsonInput['awsEC2']['pemAddress'] = pemAddress
 	jsonInput['OS'] = osType
+	jsonInput['User'] = userInput
 
 	#Implement try-catch block for checking unicode.
 	#This ensures writing to a file is in in unicode :
