@@ -19,6 +19,7 @@ def writeTFmain(instanceNumbers, AMI_type, spotBid, volumeSize):
 		vpcConfig = configVals['awsEC2']['secGroup']
 		aws_key = configVals['awsCreds']['access_key']
 		aws_secret_key = configVals['awsCreds']['aws_secret_key']
+		userName = configVals['User']
 		
 		pemConfig = configVals['awsEC2']['pemAddress']
 		pemNameConfig = pemConfig.split('/')
@@ -36,8 +37,8 @@ def writeTFmain(instanceNumbers, AMI_type, spotBid, volumeSize):
 		contents = re.sub('VPC///', str(vpcConfig), contents)
 		contents = re.sub('PEM_ADDRESS///', str(pemConfig), contents)
 		contents = re.sub('PEM_NAME///', str(pemNameConfig), contents)
+		contents = re.sub('USER////', str(userName), contents)
 
-		#print(contents)
 		f.close()
 
 	w= open("Main.tf","w+")
@@ -230,7 +231,6 @@ if __name__ == "__main__":
 				print("Sending SSM command.")
 				print("ID: " + listReturn[instance_ID])
 				print("S3 arg " + args.s3_output)
-				print(RNA_Commands)
 				sendSSMCommand(listReturn[instance_ID],RNA_Commands, args.s3_output) 
 				
 		else:
