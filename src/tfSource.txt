@@ -1,16 +1,16 @@
 resource "aws_iam_role" "ec2_access" {
-    name               = "ec2_policy_access"
+    name               = "ec2_policy_access_USER////"
     assume_role_policy = "${file("assume-role-policy.json")}"
   }
 
 
-  resource "aws_iam_role_policy_attachment" "SSM_Profile" {
+  resource "aws_iam_role_policy_attachment" "SSM_Profile_USER////" {
     role = "${aws_iam_role.ec2_access.name}"
     policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
   }
 
-  resource "aws_iam_instance_profile" "SSM_Profile" {
-    name  = "SSM_Profile"
+  resource "aws_iam_instance_profile" "SSM_Profile_USER////" {
+    name  = "SSM_Profile_USER////"
     role = "${aws_iam_role.ec2_access.name}"
   }
 
@@ -53,7 +53,7 @@ resource "aws_iam_role" "ec2_access" {
     key_name =    "${var.aws_keypair}"
     instance_type = "TYPE///"
     spot_type     = "one-time"
-    iam_instance_profile   = "${aws_iam_instance_profile.SSM_Profile.name}"
+    iam_instance_profile   = "${aws_iam_instance_profile.SSM_Profile_USER////.name}"
     associate_public_ip_address = true
     wait_for_fulfillment = true
     
