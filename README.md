@@ -78,8 +78,8 @@ All commands must be made from your terraform directory.
 ## 1.2 Update Notes:
   - Patched Immunospace.py write main terraform function to include writing terraform.tfvars file based on config.json setup. 
   - Updated SSM pipelines to auto-copy to bucket designated in config.json
-  - Now using Docker container Immunotools to version3 which takes up ~270MB of more space (~750MB total).   
-    - Immunotoools version3 docker container now contains [MiXCR](https://mixcr.readthedocs.io/en/master/)  
+  - Now using Docker container Immunotools to version4 which takes up ~270MB of more space (~750MB total).   
+    - Immunotoools version4 docker container now contains [MiXCR](https://mixcr.readthedocs.io/en/master/) and bedtools  
   - Added MiXCR pipeline that is swappable with the RNAseq default.  Same inputs as RNAseq pipeline. 
   - Immunospace configure now prompts for a "username". This is can be an arbitrary selected name that will make the EC2 IAM and key permission names unique reducing errors from multiple users from the same account using the software at once. 
   
