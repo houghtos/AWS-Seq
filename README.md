@@ -10,7 +10,7 @@
 
 [Functionality](#Functionality)
 
-[Setting up](#"Setting up")
+[Setting up](#Setting-up)
 
 [Usage](#Usage)
 
