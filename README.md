@@ -6,12 +6,12 @@
 ###### Credit: David Redmond helping develop RNAseq & mixcr fastq paired pipelines. 
 
 ##### Table of Contents  
-[Dependencies](#Dependencies)
-[Functionality](#Functionality)
-[Setting up](#Setting-up)
-[Usage](#Usage)
-[Patch Notes](#Patch-Notes)
-[Known Issues](#Known-Issues)
+1. [Dependencies](#Dependencies)
+2. [Functionality](#Functionality)
+3. [Setting up](#Setting-up)
+4. [Usage](#Usage)
+5. [Patch Notes](#Patch-Notes)
+6. [Known Issues](#Known-Issues)
 
 ## Dependencies:
 
