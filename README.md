@@ -7,15 +7,10 @@
 
 ##### Table of Contents  
 [Dependencies](#Dependencies)
-
 [Functionality](#Functionality)
-
 [Setting up](#Setting-up)
-
 [Usage](#Usage)
-
-[Update Notes](#1.2-Update-Notes)
-
+[Patch Notes](#Patch-Notes)
 [Known Issues](#Known-Issues)
 
 ## Dependencies:
@@ -87,7 +82,9 @@ All commands must be made from your terraform directory.
     
     The number of rows in the CSV should be the same as number of instances you are starting.  Each row of paired fastq files will be processed by one instance via sending SSM command.
     
-## 1.2 Update Notes:
+## Patch Notes
+
+##### 1.2 Update Notes:
   - Patched Immunospace.py write main terraform function to include writing terraform.tfvars file based on config.json setup. 
   - Updated SSM pipelines to auto-copy to bucket designated in config.json
   - Now using Docker container Immunotools to version4 which takes up ~270MB of more space (~750MB total).   
@@ -95,7 +92,7 @@ All commands must be made from your terraform directory.
   - Added MiXCR pipeline that is swappable with the RNAseq default.  Same inputs as RNAseq pipeline. 
   - Immunospace configure now prompts for a "username". This is can be an arbitrary selected name that will make the EC2 IAM and key permission names unique reducing errors from multiple users from the same account using the software at once. 
   
-## 1.1 Update Notes:
+##### 1.1 Update Notes:
   - Added configure functionality so user has to make far fewer modifications to code.
   - Set SSM timeout to 10 hours per instance (rather than 1 hour default).  This can be adjusted in the immunospace.py file under the boto3 SSM function.
   - Minor changes to RNAseq pipeline to run smoother.
