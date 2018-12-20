@@ -47,19 +47,33 @@ def runConfig():
 				pass
 
 
-		tempDat = priorConfig['S3bucket']
 		S3bucket = input('AWS S3 Bucket Output: ')
+		if S3bucket == '':
+			S3bucket = priorConfig['S3bucket']
+		else:
+			pass
 
 
 		secGroup = input('Input security group: ')
+		if secGroup == '':
+			secGroup = priorConfig['awsEC2']['secGroup']
+		else:
+			pass
 
 		pemAddress = input('Input Private Security Key (.pem) address: ')
+		if pemAddress == '':
+			pemAddress = priorConfig['awsEC2']['secGroup']
+		else:
+			pass
 
 		osInput = input('Linux, Mac or Windows Operating System (accpetable answers are "linux", "mac", "unix", or "windows"): ' )
-		if osInput.lower() in ('linux','mac', 'unix'):
-			osType = './terraform'
+		if osInput == '':
+			osInput = priorConfig['OS']
 		else:
-			osType = 'Terraform'
+			if osInput.lower() in ('linux','mac', 'unix'):
+				osType = './terraform'
+			else:
+				osType = 'Terraform'
 
 		userInput = input('Input username to associate with your Immunospace activity: ' )
 
