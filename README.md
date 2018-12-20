@@ -91,13 +91,17 @@ All commands must be made from your terraform directory.
 
 
 ## Known Issues:
-  - "aws_iam_role.ec2_access: Error creating IAM Role xxxxx: EntityAlreadyExists: Role with name xxxx already exists."  Error induced from multiple users attempting to use same IAM role name at the same time.  Also caused by incomplete deletion of Terraform infastructure after use. 
+  - "aws_iam_role.ec2_access: Error creating IAM Role xxxxx: EntityAlreadyExists: Role with name xxxx already exists."  
   
-  Solutions: delete all infastructure for all users and re-run.  This bug was addressed in version 1.2 and should be less prevelant.
+  Error induced from multiple users attempting to use same IAM role name at the same time.  Also caused by incomplete deletion of Terraform infastructure after use. 
   
-  - "aws_spot_instance_request.test_spot.1: Error requesting spot instances: InvalidSubnetID.NotFound: No default subnet for availability zone: 'null'."  Error is random and appears to be induced by increased AWS usage (and decreased capacitiy for spot usage) in given region.    
+  *Solutions:* delete all infastructure for all users and re-run.  This bug was addressed in version 1.2 and should be less prevelant.
   
-   Solutions: Ensure you have a default VPC and subnets available for the region you are running your infastructure.  Check to ensure there is capacity to launch spot instances in your specified region's availability areas.  A simple work around to ensure the availability zone is not overcapacity is to add "availability_zone" to tfSource.py resource "aws_spot_instance_request" per below example:
+  - "aws_spot_instance_request.test_spot.1: Error requesting spot instances: InvalidSubnetID.NotFound: No default subnet for availability zone: 'null'."  
+  
+  Error is random and appears to be induced by increased AWS usage (and decreased capacitiy for spot usage) in given region.    
+  
+   *Solutions:* Ensure you have a default VPC and subnets available for the region you are running your infastructure.  Check to ensure there is capacity to launch spot instances in your specified region's availability areas.  A simple work around to ensure the availability zone is not overcapacity is to add "availability_zone" to tfSource.py resource "aws_spot_instance_request" per below example:
    
     resource "aws_spot_instance_request" "test_spot" {
     count         = n
