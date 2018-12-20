@@ -5,6 +5,9 @@
 
 ###### Credit: David Redmond helping develop RNAseq & mixcr fastq paired pipelines. 
 
+##### Table of Contents  
+[Dependencies](#Dependencies)  
+
 
 ## Dependencies:
 
