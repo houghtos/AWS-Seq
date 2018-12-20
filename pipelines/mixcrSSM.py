@@ -1,4 +1,6 @@
-#Runs [MiXCR](https://mixcr.readthedocs.io/en/master/) on paired fastq files.
+#Runs MiXCR: https://mixcr.readthedocs.io/en/master/ 
+#For paired FASTQ files from S3 bucket.
+
 import json
 def mixcrSSM(file_list, s3_output):
 	with open('config.json') as g:
