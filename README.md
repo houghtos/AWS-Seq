@@ -14,9 +14,9 @@
 
 [Usage](#Usage)
 
-[Update Notes](#1.2 Update Notes)
+[Update Notes](#1.2-Update-Notes)
 
-[Known Issues](#Known Issues)
+[Known Issues](#Known-Issues)
 
 ## Dependencies:
 
