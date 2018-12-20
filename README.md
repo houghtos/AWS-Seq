@@ -88,3 +88,20 @@ All commands must be made from your terraform directory.
   - Set SSM timeout to 10 hours per instance (rather than 1 hour default).  This can be adjusted in the immunospace.py file under the boto3 SSM function.
   - Minor changes to RNAseq pipeline to run smoother.
   - Added option '-c' to "$ python immunospace.py start ..." for cloud prefix output of files and SSM run logs.
+
+
+## Known Issues:
+  - "aws_iam_role.ec2_access: Error creating IAM Role xxxxx: EntityAlreadyExists: Role with name xxxx already exists."  Error induced from multiple users attempting to use same IAM role name at the same time.  Also caused by incomplete deletion of Terraform infastructure after use. 
+  
+  Solutions: delete all infastructure for all users and re-run.  This bug was addressed in version 1.2 and should be less prevelant.
+  
+  - "aws_spot_instance_request.test_spot.1: Error requesting spot instances: InvalidSubnetID.NotFound: No default subnet for availability zone: 'null'."  Error is random and appears to be induced by increased AWS usage (and decreased capacitiy for spot usage) in given region.    
+  
+   Solutions: Ensure you have a default VPC and subnets available for the region you are running your infastructure.  Check to ensure there is capacity to launch spot instances in your specified region's availability areas.  A simple work around to ensure the availability zone is not overcapacity is to add "availability_zone" to tfSource.py resource "aws_spot_instance_request" per below example:
+   
+    resource "aws_spot_instance_request" "test_spot" {
+    count         = n
+    ami           = ami_xxxx
+    availability_zone = "us-east-1f"
+    }
+
