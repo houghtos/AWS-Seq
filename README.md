@@ -11,7 +11,8 @@
 3. [Setting up](#Setting-up)
 4. [Usage](#Usage)
 5. [Patch Notes](#Patch-Notes)
-6. [Known Issues](#Known-Issues)
+6. [Pipelines](#Pipelines)
+7. [Known Issues](#Known-Issues)
 
 ## Dependencies:
 
@@ -98,6 +99,13 @@ All commands must be made from your terraform directory.
   - Minor changes to RNAseq pipeline to run smoother.
   - Added option '-c' to "$ python immunospace.py start ..." for cloud prefix output of files and SSM run logs.
 
+## Pipelines:
+
+1. HLA Typing: Input SINGLE bam files in the csv.
+2. RNAseq: Input paired FASTQ files (see example input)
+3. MIXCR: Input paired FASTQ files (see example input)
+4. MIXCR + RNAseq: Input paired FASTQ files.
+ 
 
 ## Known Issues:
   - "aws_iam_role.ec2_access: Error creating IAM Role xxxxx: EntityAlreadyExists: Role with name xxxx already exists."  
