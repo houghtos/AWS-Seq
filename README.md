@@ -6,7 +6,7 @@
 
 ###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 instance and S3 from the same region does not incur download charges.
 
-###### Credit: David Redmond aiding in development of RNAseq & Mixcr fastq paired pipelines. 
+###### Credit: David Redmond aiding in development of RNAseq & Mixcr fastq paired pipelines. Zach Jones with logo design.
 
 ##### Table of Contents  
 1. [Dependencies](#Dependencies)
