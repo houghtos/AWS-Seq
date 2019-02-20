@@ -1,5 +1,5 @@
 
-![Immunospace](https://github.com/houghtos/Immunospace/blob/master/Immunospace_half.jpg)
+![Immunospace](https://github.com/houghtos/Immunospace/blob/master/Immunospace.jpg)
 
 # Immunospace 1.2
 ###### Command line interface tool for cost effective NGS data processing with the AWS cloud.  Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation, provisioning, and job submission.  Monitor cloud price trends to optimize processing time saving computing costs.  Current public pipelines process paired fastq RNAseq files. 
