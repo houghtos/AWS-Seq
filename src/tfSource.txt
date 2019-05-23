@@ -49,8 +49,7 @@ resource "aws_iam_role" "ec2_access" {
   resource "aws_spot_instance_request" "test_spot" {
     count         = COUNT
     ami           = "${data.aws_ami.amazon_linux.id}"
-    spot_price    = BID/// 
-    key_name =    "${var.aws_keypair}"
+    spot_price    = BID///
     instance_type = "TYPE///"
     spot_type     = "one-time"
     iam_instance_profile   = "${aws_iam_instance_profile.SSM_Profile_USER////.name}"
