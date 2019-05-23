@@ -65,7 +65,7 @@ resource "aws_iam_role" "ec2_access" {
       volume_size = SIZE///
       }
 
-    tags {
+    tags = {
       Name = "Immuno Spot"
     }
   }
