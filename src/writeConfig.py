@@ -71,7 +71,7 @@ def runConfig():
 			osInput = priorConfig['OS']
 		else:
 			if osInput.lower() in ('linux','mac', 'unix'):
-				osType = './terraform'
+				osType = 'terraform'
 			else:
 				osType = 'Terraform'
 
