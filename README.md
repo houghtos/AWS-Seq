@@ -37,21 +37,25 @@
 
 ## Setting up:
 
-  1. Install [Terraform](https://www.terraform.io/intro/getting-started/install.html), [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installing/), , and [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html).  
-  2. Configure your AWS CLI with access key, secret key, and region.
-  3. Download all source files to your terraform directory (or the directory you set terraform to run in).
-  4. Run the Immunospace configure (see usage below).  Strongly suggest setting EC2 region to same as S3 to avoid egress costs.
+  1. Install [Terraform](https://www.terraform.io/intro/getting-started/install.html), [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installing/), , the and [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html).  
+  2. Configure local machine's AWS CLI with access key, secret key, and region.  The
+  3. Download all source files to the terraform installed directory.  
+  4. Run the "Immunospace.py configure" command (see usage below).  This will set permissions each EC2 spot instance will inherit.  Please configure with AWS keys from an IAM user which ONLY has S3 read/write permission to where the input data (e.g. s3://bucket/AWS.pipeline.results/file_R1.fastq.gz) is stored. 
+  5. Download the [full hg19 (human), mm10 (mouse)](http://hgdownload.cse.ucsc.edu/downloads.html), or other species reference genome data sets.  Upload this to an S3 bucket/prefix readable by the Immunospace configured IAM user from prior step (4).
 
-  ###### Not Required: 
   
-  - **SpotPriceModule.py**: Filters for what EC2 pricing can be manually modified in line 33
-  
-  ###### Required: 
+  ###### Required Code Changes: 
   - **RNAseqSSM.py** Set lines:
                   
     - 25       -- With your S3 address for reference genome files.  In the RNAseqSSM.py example, we use mm10.
     - 73       -- Set the .gtf reference file used in htseq analysis.  In the RNAseqSSM.py example, we use Mus_musculus.GRCm38.75.gtf.  This would be one of the files copied from your reference genome files.
      
+  
+  
+  ###### Optional Code Settings: 
+  
+  - **SpotPriceModule.py**: Filters for what EC2 pricing can be manually modified in line 33
+  
   
 ## Usage:
 
