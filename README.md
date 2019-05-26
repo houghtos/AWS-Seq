@@ -33,7 +33,7 @@
   3. Launch custom AWS spot EC2 instance types and pass bash commands to spot EC2 instance(s) to process paired RNA fastq files.
   4. Get status and attributes of commands being invoked.
   5. Get instance IDs of all active instances.
-  6. Destroy all terraform infastructure.
+  6. Destroy all terraform infastructure.  Note: please remember to destroy all terraform infastrucutre after a run completes or fails.  Even if a run is complete, there will still be some leftover infastructure that should be destroyed before the next run as it can induce errors.
 
 ## Setting up:
 
