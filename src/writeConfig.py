@@ -12,7 +12,7 @@ def runConfig():
 	import io
 
 
-	with open('config.json') as f:
+	with open('config.json','w+') as f:
 		priorConfig = json.load(f)
 		tempDat = priorConfig['awsCreds']['access_key'] 
 		if tempDat == '':
