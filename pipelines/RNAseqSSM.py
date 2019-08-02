@@ -54,12 +54,12 @@ def RNA_SSM(file_list, s3_output):
 			fastq2_trimmed_unpaired.insert(2,'unpaired')
 			fastq2_trimmed_unpaired = ".".join(fastq2_trimmed_unpaired)
 
-			star_output_prefix = fastq1.split('.')[0]
+			star_output_prefix = fastq1.split('.')[0] + '.'
 			
-			out_sam = star_output_prefix + ".Aligned.out.sam"
-			aligned_out_sam = star_output_prefix + ".Aligned.out.sorted.sam"
-			aligned_out_bam = star_output_prefix + ".Aligned.out.sorted.bam"
-			gene_counts = star_output_prefix + ".gene.counts"
+			out_sam = star_output_prefix + "Aligned.out.sam"
+			aligned_out_sam = star_output_prefix + "Aligned.out.sorted.sam"
+			aligned_out_bam = star_output_prefix + "Aligned.out.sorted.bam"
+			gene_counts = star_output_prefix + "gene.counts"
 
 			iteration += 1
 
