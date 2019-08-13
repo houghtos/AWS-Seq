@@ -2,11 +2,11 @@
 ![Immunospace](https://github.com/houghtos/Immunospace/blob/master/Immunospace.jpg)
 
 # Immunospace 1.2
-###### Command line interface tool for cost effective NGS data processing with the AWS cloud.  Uses Terraform, AWS CLI, and boto3 (python) to automate EC2 spot instance creation, provisioning, and job submission.  Monitor cloud price trends to optimize processing time saving computing costs.  Current public pipelines process paired fastq RNAseq files. 
+###### Cost effective processing bulk-RNAseq data through command line.  Can be modified for additional analysis types (e.g. ATAC/ChIP-seq).   Uses Terraform and AWS SDK/Tool dependencies described below. Monitor instance progress regularly & check outputs.  Do not run workflows longer than 24 hours.      
 
-###### Heavily recommend launching EC2 instances from same region as S3 buckets.  Copying between an EC2 instance and S3 from the same region does not incur download charges.
+###### Please ensure EC2 instances are from same region as S3 buckets.  Copying between an EC2 instance and S3 from the same region does not incur download charges.  
 
-###### Credit: David Redmond aiding in development of RNAseq & Mixcr fastq paired pipelines. Zach Jones with logo design.
+######  Downloading large files from S3 can be costly. Designed for uploading larger files (e.g. fastq or bam) to S3 and downloading resulting files (e.g. .tsv or .txt). 
 
 ##### Table of Contents  
 1. [Dependencies](#Dependencies)
