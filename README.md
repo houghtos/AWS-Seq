@@ -75,13 +75,13 @@ All commands must be made from your terraform directory.
       - S3 file list is a CSV of S3 file addresses.  Each row contains fastq pairs.  The first row contains pairs to be submitted to first EC2 instance.  The row column pairs for second EC2 instance. etc. See next section for more information.
       -  S3 prefix (assuming bucket is already configured) to write files and SSM logs to.
       
-    4. $ python Immunospace command
+    4. $ python Immunospace.py command
       -No options.  Looks for all recent commands invoked.
     
-    5. $ python Immunospace instances 
+    5. $ python Immunospace.py instances 
       - No options.  Displays all active instances launched by terraform as list.
     
-    6. $ python Immunospace destroy
+    6. $ python Immunospace.py destroy
      - No options.  Destroys all Terraform infastructure that currently exists.
      
 ## csv file input:
