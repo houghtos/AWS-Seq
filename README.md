@@ -1,4 +1,7 @@
 
+Note: This is no longer maintained and likely incompatible with current versions of Terraform and possibly AWS SSM. 
+
+
 ![Immunospace](https://github.com/houghtos/Immunospace/blob/master/Immunospace.jpg)
 
 # Immunospace 1.2
